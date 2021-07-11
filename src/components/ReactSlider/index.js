@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
 
 import './index.css'
@@ -46,10 +47,11 @@ class ReactSlider extends Component {
   fetchNetflixOriginalsData = () => {
     const {category} = this.props
     console.log(category)
-    fetch(category)
+    fetch(category.url)
       .then(response => response.json())
       .then(response => {
         this.setState({netflixOriginals: response.results})
+        console.log(response.results)
       })
   }
 
@@ -59,9 +61,10 @@ class ReactSlider extends Component {
     return (
       <Slider {...settings}>
         {netflixOriginals.map(movie => {
+          const linkPath = `/movie/${movie.id}`
           const movieImage = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
           return (
-            <div className="react-slick-item" key={movie.id}>
+            <Link to={linkPath}>
               <img
                 alt="sss"
                 className="poster"
@@ -69,7 +72,7 @@ class ReactSlider extends Component {
                 width="100%"
                 height="100%"
               />
-            </div>
+            </Link>
           )
         })}
       </Slider>
@@ -77,11 +80,14 @@ class ReactSlider extends Component {
   }
 
   render() {
+    const {category} = this.props
     const {netflixOriginals} = this.state
 
     return (
       <div className="slick-app-container">
-        <h1>Netflix Originals</h1>
+        <h1 className="category-name" style={{textAlign: 'left'}}>
+          {category.name}
+        </h1>
         <div style={{width: '80%'}}>
           {netflixOriginals.length ? (
             this.renderSlider()

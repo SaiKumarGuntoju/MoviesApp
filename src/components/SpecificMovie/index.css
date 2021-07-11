@@ -1,0 +1,50 @@
+.backdrop-image {
+  width: 100vw;
+  height: 500px;
+}
+.backdrop-poster-container {
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+.play-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 24px;
+
+  background: #ffffff;
+  border-radius: 4px;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px;
+}
+.movie-description {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  /* or 130% */
+
+  /* General/White */
+
+  color: #ffffff;
+}
+.movie-title {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 63px;
+  /* identical to box height */
+
+  color: #ffffff;
+}
+.movie-details-container {
+  width: 50%;
+}

@@ -68,3 +68,9 @@
     height: 250px;
   }
 }
+.category-name {
+  color: #ffffff;
+  font-size: 32px;
+
+  font-weight: 600;
+}

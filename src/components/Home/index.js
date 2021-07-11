@@ -4,9 +4,16 @@ import Header from '../Header'
 import './index.css'
 
 const allMoviesCategory = [
-  'https://api.themoviedb.org/3/movie/top_rated?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US',
-
-  'https://api.themoviedb.org/3/trending/all/week?api_key=b0c10bd24207804b5bc4163824d992f7',
+  {
+    name: 'Top Rated',
+    url:
+      'https://api.themoviedb.org/3/movie/top_rated?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US',
+  },
+  {
+    name: 'Trending',
+    url:
+      'https://api.themoviedb.org/3/trending/all/week?api_key=b0c10bd24207804b5bc4163824d992f7',
+  },
 ]
 
 class Home extends Component {

@@ -88,3 +88,6 @@
   background: #e50914;
   border-radius: 4px;
 }
+.errorNote {
+  color: red;
+}

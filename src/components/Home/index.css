@@ -1,0 +1,10 @@
+.home-page-top-section {
+  background-image: url('https://images8.alphacoders.com/403/403795.jpg');
+  height: 605px;
+  width: 100vw;
+  background-size: cover;
+}
+.home-page-container {
+  background-color: black;
+  width: 100vw;
+}

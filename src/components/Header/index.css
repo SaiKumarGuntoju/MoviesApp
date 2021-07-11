@@ -1,0 +1,32 @@
+.header-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+}
+.nav-container {
+  width: 100vw;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.header-movie-heading {
+  color: #e50014;
+  font-size: 25px;
+}
+.nav-link-home {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+}
+.nav-link-popular {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+}
+.link-decoration {
+  text-decoration: none;
+}

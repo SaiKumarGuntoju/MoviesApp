@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
 import './index.css'
 
 class LoginForm extends Component {
@@ -6,6 +7,17 @@ class LoginForm extends Component {
     username: '',
     password: '',
     API_KEY: 'b0c10bd24207804b5bc4163824d992f7',
+    showErrorMsg: false,
+  }
+
+  onSubmitSuccess = requestToken => {
+    const {history} = this.props
+    Cookies.set('request_token', requestToken, {expires: 30})
+    history.replace('/')
+  }
+
+  onSubmitFailure = error => {
+    this.setState({showErrorMsg: true, errorMsg: error})
   }
 
   onSubmitForm = async event => {
@@ -25,7 +37,6 @@ class LoginForm extends Component {
       password,
       request_token: tokenData.request_token,
     }
-    console.log(tokenData)
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -35,7 +46,11 @@ class LoginForm extends Component {
     }
     const response = await fetch(loginUrl, options)
     const data = await response.json()
-    console.log(data)
+    if (response.ok === true) {
+      this.onSubmitSuccess(data.request_token)
+    } else {
+      this.onSubmitFailure(data.status_message)
+    }
   }
 
   onChangePassword = event => this.setState({password: event.target.value})
@@ -70,20 +85,24 @@ class LoginForm extends Component {
     </div>
   )
 
-  renderLoginForm = () => (
-    <div className="login-card-container">
-      <form onSubmit={this.onSubmitForm}>
-        <h1 className="sign-in-title">Sign In</h1>
-        {this.renderUsernameElement()}
-        {this.renderPasswordElement()}
-        <div className="button-container">
-          <button className="signin-button" type="submit">
-            LogIn
-          </button>
-        </div>
-      </form>
-    </div>
-  )
+  renderLoginForm = () => {
+    const {showErrorMsg, errorMsg} = this.state
+    return (
+      <div className="login-card-container">
+        <form onSubmit={this.onSubmitForm}>
+          <h1 className="sign-in-title">Sign In</h1>
+          {this.renderUsernameElement()}
+          {this.renderPasswordElement()}
+          <div className="button-container">
+            <button className="signin-button" type="submit">
+              LogIn
+            </button>
+          </div>
+        </form>
+        {showErrorMsg && <p className="errorNote">{errorMsg}</p>}
+      </div>
+    )
+  }
 
   render() {
     return (

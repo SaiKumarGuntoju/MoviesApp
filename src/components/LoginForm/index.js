@@ -6,18 +6,26 @@ class LoginForm extends Component {
     username: '',
     password: '',
     API_KEY: 'b0c10bd24207804b5bc4163824d992f7',
-    requestToken: '0bb154961e051972f87a04ef9a4c0e1193dd10d2',
   }
 
   onSubmitForm = async event => {
     event.preventDefault()
-    const {username, password, API_KEY, requestToken} = this.state
+    const {username, password, API_KEY} = this.state
+
+    const getRequestTokenUrl = `https://api.themoviedb.org/3/authentication/token/new?api_key=${API_KEY}`
+    const option = {
+      method: 'GET',
+    }
+    const getTokenResponse = await fetch(getRequestTokenUrl, option)
+    const tokenData = await getTokenResponse.json()
+
+    const loginUrl = `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${API_KEY}`
     const userDetails = {
       username,
       password,
-      request_token: requestToken,
+      request_token: tokenData.request_token,
     }
-    const url = `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${API_KEY}`
+    console.log(tokenData)
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -25,9 +33,9 @@ class LoginForm extends Component {
         'Content-type': 'application/json',
       },
     }
-    const response = await fetch(url, options)
+    const response = await fetch(loginUrl, options)
     const data = await response.json()
-    console.log(response)
+    console.log(data)
   }
 
   onChangePassword = event => this.setState({password: event.target.value})

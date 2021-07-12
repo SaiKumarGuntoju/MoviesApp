@@ -70,7 +70,12 @@
 }
 .category-name {
   color: #ffffff;
-  font-size: 32px;
-
+  font-size: 28px;
   font-weight: 600;
+}
+
+.category-name-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 80vw;
 }

@@ -1,7 +1,9 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {BiChevronRightSquare, BiChevronLeftSquare} from 'react-icons/bi'
 import Header from '../Header'
 import './index.css'
+import Footer from '../Footer'
 
 class Popular extends Component {
   state = {popularMovies: [], pageNumber: 1}
@@ -60,12 +62,15 @@ class Popular extends Component {
       <>
         {popularMovies.map(movie => {
           const movieImage = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+          const moviePath = `/movie/${movie.id}`
           return (
-            <img
-              className="popular-image"
-              alt="popular-movie"
-              src={movieImage}
-            />
+            <Link to={moviePath}>
+              <img
+                className="popular-image"
+                alt="popular-movie"
+                src={movieImage}
+              />
+            </Link>
           )
         })}
       </>
@@ -74,15 +79,12 @@ class Popular extends Component {
 
   render() {
     return (
-      <div>
+      <div className="popularMovies-body-section">
         <Header />
-        <div className="popularMovies-body-section">
-          <div className="popular-movies-list">
-            {this.renderPopularMovies()}
-          </div>
+        <div className="popular-movies-list">{this.renderPopularMovies()}</div>
 
-          {this.renderPageNumberSection()}
-        </div>
+        {this.renderPageNumberSection()}
+        <Footer />
       </div>
     )
   }

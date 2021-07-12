@@ -46,12 +46,10 @@ class ReactSlider extends Component {
 
   fetchNetflixOriginalsData = () => {
     const {category} = this.props
-    console.log(category)
     fetch(category.url)
       .then(response => response.json())
       .then(response => {
         this.setState({netflixOriginals: response.results})
-        console.log(response.results)
       })
   }
 
@@ -85,9 +83,9 @@ class ReactSlider extends Component {
 
     return (
       <div className="slick-app-container">
-        <h1 className="category-name" style={{textAlign: 'left'}}>
-          {category.name}
-        </h1>
+        <div className="category-name-container">
+          <h1 className="category-name">{category.name}</h1>
+        </div>
         <div style={{width: '80%'}}>
           {netflixOriginals.length ? (
             this.renderSlider()

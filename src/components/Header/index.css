@@ -8,6 +8,9 @@
   width: 100vw;
   padding-left: 20px;
   padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .header-movie-heading {
   color: #e50014;
@@ -29,4 +32,32 @@
 }
 .link-decoration {
   text-decoration: none;
+}
+.search-user-container {
+  display: flex;
+  align-items: center;
+}
+.search-input-container {
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+.search-input {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 130px;
+}
+.user-icon {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+}
+.search-icon {
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
 }

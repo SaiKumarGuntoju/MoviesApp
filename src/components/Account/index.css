@@ -1,0 +1,25 @@
+.membership-container {
+  display: flex;
+}
+.plan-details-container {
+  display: flex;
+}
+.line-break {
+  background-color: #cbd5e1;
+  height: 2px;
+  width: 1110px;
+}
+.account-page-container {
+  background-color: black;
+}
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: #ffffff;
+}
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

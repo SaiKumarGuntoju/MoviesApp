@@ -7,13 +7,12 @@ import './index.css'
 class Header extends Component {
   state = {searchInputValue: ''}
 
-  onChangeSearchInput = event => {
+  onClickEnterKey = event => {
     this.setState({searchInputValue: event.target.value})
   }
 
   render() {
     const {searchInputValue} = this.state
-    console.log(searchInputValue)
     return (
       <nav className="nav-container">
         <div className="header-links">
@@ -30,14 +29,19 @@ class Header extends Component {
         <div className="search-user-container">
           <div className="search-input-container">
             <input
-              onChange={this.onChangeSearchInput}
+              onChange={this.onClickEnterKey}
+              value={searchInputValue}
               className="search-input"
               placeholder="Search"
               type="text"
             />
-            <BiSearch className="search-icon" />
+            <Link to={`search/${searchInputValue}`}>
+              <BiSearch className="search-icon" />
+            </Link>
           </div>
-          <FaUserCircle className="user-icon" />
+          <Link to="/account/">
+            <FaUserCircle className="user-icon" />
+          </Link>
         </div>
       </nav>
     )

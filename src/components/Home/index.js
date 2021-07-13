@@ -1,7 +1,10 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 import ReactSlider from '../ReactSlider'
 import Footer from '../Footer'
 import Header from '../Header'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import './index.css'
 
 const allMoviesCategory = [
@@ -23,7 +26,7 @@ const allMoviesCategory = [
 ]
 
 class Home extends Component {
-  state = {HomePageRandomMovie: []}
+  state = {HomePageRandomMovie: [], isLoading: true}
 
   componentDidMount() {
     this.getMovieDetails()
@@ -32,10 +35,20 @@ class Home extends Component {
   getMovieDetails = async () => {
     const randomNumber = Math.ceil(Math.random() * 20)
     const MoviesUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=b0c10bd24207804b5bc4163824d992f7`
-    const response = await fetch(MoviesUrl)
+    const requestToken = Cookies.get('request_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${requestToken}`,
+      },
+    }
+    const response = await fetch(MoviesUrl, options)
     const data = await response.json()
 
-    this.setState({HomePageRandomMovie: data.results[randomNumber]})
+    this.setState({
+      HomePageRandomMovie: data.results[randomNumber],
+      isLoading: false,
+    })
   }
 
   renderBackdropPoster = () => {
@@ -61,16 +74,27 @@ class Home extends Component {
     )
   }
 
+  renderHomePage = () => (
+    <>
+      <div className="home-page-top-section">{this.renderBackdropPoster()}</div>
+      {allMoviesCategory.map(category => (
+        <ReactSlider category={category} />
+      ))}
+      <Footer />
+    </>
+  )
+
   render() {
+    const {isLoading} = this.state
     return (
       <div className="home-page-container">
-        <div className="home-page-top-section">
-          {this.renderBackdropPoster()}
-        </div>
-        {allMoviesCategory.map(category => (
-          <ReactSlider category={category} />
-        ))}
-        <Footer />
+        {isLoading ? (
+          <div testid="loader" className="loader-container">
+            <Loader type="TailSpin" color="red" height={50} width={100} />
+          </div>
+        ) : (
+          this.renderHomePage()
+        )}
       </div>
     )
   }

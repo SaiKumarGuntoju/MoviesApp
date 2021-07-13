@@ -1,10 +1,13 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 import Headers from '../Header'
 import './index.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 class SpecificMovie extends Component {
-  state = {movieDetails: [], similarMoviesList: []}
+  state = {movieDetails: [], similarMoviesList: [], isLoading: true}
 
   componentDidMount() {
     this.getMovieDetails()
@@ -16,9 +19,19 @@ class SpecificMovie extends Component {
     const {params} = match
     const {id} = params
     const similarMoviesUrl = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US&page=1`
-    const similarMoviesResponse = await fetch(similarMoviesUrl)
+    const requestToken = Cookies.get('request_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${requestToken}`,
+      },
+    }
+    const similarMoviesResponse = await fetch(similarMoviesUrl, options)
     const similarMoviesData = await similarMoviesResponse.json()
-    this.setState({similarMoviesList: similarMoviesData.results})
+    this.setState({
+      similarMoviesList: similarMoviesData.results,
+      isLoading: false,
+    })
   }
 
   getMovieDetails = async () => {
@@ -26,7 +39,14 @@ class SpecificMovie extends Component {
     const {params} = match
     const {id} = params
     const getMovieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US`
-    const response = await fetch(getMovieUrl)
+    const requestToken = Cookies.get('request_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${requestToken}`,
+      },
+    }
+    const response = await fetch(getMovieUrl, options)
     const data = await response.json()
 
     this.setState({movieDetails: data}, this.componentDidMount)
@@ -61,8 +81,6 @@ class SpecificMovie extends Component {
         className="backdrop-poster-container"
         style={{
           backgroundImage: `url(${imageUrl})`,
-          height: 500,
-          width: '100vw',
           backgroundSize: 'cover',
         }}
       >
@@ -77,10 +95,21 @@ class SpecificMovie extends Component {
   }
 
   render() {
+    const {isLoading} = this.state
     return (
       <div>
-        {this.renderBackdropPoster()}
-        <ul className="similar-movies-container">{this.renderMoreMovies()}</ul>
+        {isLoading ? (
+          <div testid="loader" className="loader-container">
+            <Loader type="TailSpin" color="red" height={50} width={100} />
+          </div>
+        ) : (
+          <>
+            {this.renderBackdropPoster()}
+            <ul className="similar-movies-container">
+              {this.renderMoreMovies()}
+            </ul>
+          </>
+        )}
       </div>
     )
   }

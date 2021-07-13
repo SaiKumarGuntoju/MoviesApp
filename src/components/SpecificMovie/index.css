@@ -1,6 +1,9 @@
 .backdrop-image {
-  width: 100vw;
-  height: 500px;
+  min-width: 360px;
+  height: 605px;
+}
+.backdrop-poster-container {
+  background-size: cover;
 }
 
 .play-button {
@@ -23,28 +26,22 @@
   font-family: HK Grotesk;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 26px;
-  /* or 130% */
-
-  /* General/White */
+  font-size: 14px;
 
   color: #ffffff;
 }
 .movie-title {
+  font-size: 30px;
+  color: #ffffff;
   font-family: HK Grotesk;
   font-style: normal;
   font-weight: 600;
-  font-size: 48px;
-  line-height: 63px;
-  /* identical to box height */
-
-  color: #ffffff;
 }
 .movie-details-container {
-  width: 60%;
+  width: 100vw;
   padding: 30px;
 }
+
 .similar-image {
   width: 255px;
   height: 170px;
@@ -55,4 +52,21 @@
   display: flex;
   width: 100vw;
   flex-wrap: wrap;
+}
+
+@media screen and (min-width: 768px) {
+  .movie-title {
+    font-family: HK Grotesk;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 63px;
+    /* identical to box height */
+
+    color: #ffffff;
+  }
+  .movie-description {
+    font-size: 20px;
+    max-width: 60vw;
+  }
 }

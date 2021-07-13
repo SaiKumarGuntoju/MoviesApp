@@ -1,12 +1,15 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
+import Loader from 'react-loader-spinner'
+import Cookies from 'js-cookie'
 import {BiChevronRightSquare, BiChevronLeftSquare} from 'react-icons/bi'
 import Header from '../Header'
 import './index.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import Footer from '../Footer'
 
 class Popular extends Component {
-  state = {popularMovies: [], pageNumber: 1}
+  state = {popularMovies: [], pageNumber: 1, isLoading: true}
 
   componentDidMount() {
     this.getPopularMovies()
@@ -15,9 +18,16 @@ class Popular extends Component {
   getPopularMovies = async () => {
     const {pageNumber} = this.state
     const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US&page=${pageNumber}`
-    const response = await fetch(popularMoviesUrl)
+    const requestToken = Cookies.get('request_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${requestToken}`,
+      },
+    }
+    const response = await fetch(popularMoviesUrl, options)
     const data = await response.json()
-    this.setState({popularMovies: data.results})
+    this.setState({popularMovies: data.results, isLoading: false})
   }
 
   onClickDecrement = () => {
@@ -78,13 +88,24 @@ class Popular extends Component {
   }
 
   render() {
+    const {isLoading} = this.state
     return (
       <div className="popularMovies-body-section">
         <Header />
-        <div className="popular-movies-list">{this.renderPopularMovies()}</div>
+        {isLoading ? (
+          <div testid="loader" className="loader-container">
+            <Loader type="TailSpin" color="red" height={50} width={100} />
+          </div>
+        ) : (
+          <>
+            <div className="popular-movies-list">
+              {this.renderPopularMovies()}
+            </div>
 
-        {this.renderPageNumberSection()}
-        <Footer />
+            {this.renderPageNumberSection()}
+            <Footer />
+          </>
+        )}
       </div>
     )
   }

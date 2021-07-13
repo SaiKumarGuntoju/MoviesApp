@@ -1,9 +1,12 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import './index.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 class SearchResults extends Component {
-  state = {searchedResultsList: []}
+  state = {searchedResultsList: [], isLoading: true}
 
   componentDidMount() {
     this.getSearchedResults()
@@ -14,9 +17,16 @@ class SearchResults extends Component {
     const {params} = match
     const {value} = params
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=b0c10bd24207804b5bc4163824d992f7&language=en-US&query=${value}&page=1`
-    const response = await fetch(searchUrl)
+    const requestToken = Cookies.get('request_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${requestToken}`,
+      },
+    }
+    const response = await fetch(searchUrl, options)
     const data = await response.json()
-    this.setState({searchedResultsList: data.results})
+    this.setState({searchedResultsList: data.results, isLoading: false})
   }
 
   renderSearchedResults = () => {
@@ -35,15 +45,23 @@ class SearchResults extends Component {
   }
 
   render() {
+    const {isLoading} = this.state
     return (
       <>
-        <div style={{backgroundColor: 'black'}}>
-          <Header />
-        </div>
-
-        <div className="searched-results-container">
-          {this.renderSearchedResults()}
-        </div>
+        {isLoading ? (
+          <div testid="loader" className="loader-container">
+            <Loader type="TailSpin" color="red" height={50} width={100} />
+          </div>
+        ) : (
+          <>
+            <div style={{backgroundColor: 'black'}}>
+              <Header />
+            </div>
+            <div className="searched-results-container">
+              {this.renderSearchedResults()}
+            </div>
+          </>
+        )}
       </>
     )
   }

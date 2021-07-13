@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 import './index.css'
 
 class LoginForm extends Component {
@@ -87,6 +88,10 @@ class LoginForm extends Component {
 
   renderLoginForm = () => {
     const {showErrorMsg, errorMsg} = this.state
+    const requestToken = Cookies.get('request_token')
+    if (requestToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-card-container">
         <form onSubmit={this.onSubmitForm}>

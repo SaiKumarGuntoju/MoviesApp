@@ -67,7 +67,7 @@ class ReactSlider extends Component {
                 alt="sss"
                 className="poster"
                 src={movieImage}
-                width="100%"
+                width="90%"
                 height="100%"
               />
             </Link>

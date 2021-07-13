@@ -22,6 +22,7 @@
   font-weight: 500;
   font-size: 16px;
   color: #ffffff;
+  margin-right: 20px;
 }
 .nav-link-popular {
   font-family: HK Grotesk;
@@ -30,6 +31,7 @@
   font-size: 16px;
   color: #ffffff;
 }
+
 .link-decoration {
   text-decoration: none;
 }
@@ -55,9 +57,35 @@
   width: 40px;
   height: 40px;
   color: #ffffff;
+  margin-right: 20px;
+  margin-left: 30px;
 }
 .search-icon {
   color: #ffffff;
   width: 24px;
   height: 24px;
+}
+.menu-icon {
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
+}
+.home-popular-container {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .home-popular-container {
+    display: none;
+  }
+  .user-icon {
+    display: none;
+  }
+  .search-input {
+    width: 80px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .menu-icon {
+    display: none;
+  }
 }

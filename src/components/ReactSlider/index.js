@@ -64,7 +64,7 @@ class ReactSlider extends Component {
           return (
             <Link to={linkPath}>
               <img
-                alt="sss"
+                alt={movie.title}
                 className="poster"
                 src={movieImage}
                 width="90%"

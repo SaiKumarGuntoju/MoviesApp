@@ -77,7 +77,7 @@ class Popular extends Component {
             <Link to={moviePath}>
               <img
                 className="popular-image"
-                alt="popular-movie"
+                alt={movie.title}
                 src={movieImage}
               />
             </Link>

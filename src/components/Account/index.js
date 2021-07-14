@@ -24,6 +24,11 @@ const Account = () => (
         </p>
       </div>
       <hr className="line-break" />
+      <div className="logout-button-container">
+        <button className="logout-button" type="button">
+          Logout
+        </button>
+      </div>
     </div>
   </div>
 )

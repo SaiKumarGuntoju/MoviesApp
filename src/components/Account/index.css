@@ -24,3 +24,32 @@
   flex-direction: column;
   align-items: center;
 }
+.logout-button {
+  color: #ffffff;
+  background-color: #e50914;
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.logout-button-container {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 768px) {
+  .line-break {
+    width: 90%;
+  }
+  .user-details-container {
+    font-size: 10px;
+  }
+  .membership-container {
+    display: flex;
+    justify-content: center;
+  }
+  .plan-details-container {
+    display: flex;
+    justify-content: center;
+  }
+}

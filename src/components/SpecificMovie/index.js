@@ -48,7 +48,6 @@ class SpecificMovie extends Component {
     }
     const response = await fetch(getMovieUrl, options)
     const data = await response.json()
-
     this.setState({movieDetails: data}, this.componentDidMount)
   }
 
@@ -63,7 +62,7 @@ class SpecificMovie extends Component {
             <Link to={moviePath}>
               <img
                 className="similar-image"
-                alt="similarMovie"
+                alt={eachMovie.title}
                 src={similarMovieImageUrl}
               />
             </Link>
@@ -77,20 +76,48 @@ class SpecificMovie extends Component {
     const {movieDetails} = this.state
     const imageUrl = `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`
     return (
-      <div
-        className="backdrop-poster-container"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-          backgroundSize: 'cover',
-        }}
-      >
-        <Headers />
-        <div className="movie-details-container">
-          <h1 className="movie-title">{movieDetails.title}</h1>
-          <p className="movie-description">{movieDetails.overview}</p>
-          <button type="button">Play</button>
+      <>
+        <div
+          className="backdrop-poster-container"
+          style={{
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: 'cover',
+          }}
+        >
+          <Headers />
+          <div className="movie-details-container">
+            <h1 className="movie-title">{movieDetails.title}</h1>
+            <p className="movie-description">{movieDetails.overview}</p>
+            <button type="button">Play</button>
+          </div>
         </div>
-      </div>
+        <div className="movie-more-details">
+          <div className="each-category">
+            <p className="category-names">Genres</p>
+            <ul className="category-list-elements">
+              {movieDetails.genres.map(genre => (
+                <li className="each-element">{genre.name}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="each-category">
+            <p className="category-names">Audio Available</p>
+            <ul className="category-list-elements">
+              {movieDetails.spoken_languages.map(audio => (
+                <li className="each-element">{audio.english_name}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="each-category">
+            <p className="category-names">Rating Count</p>
+            <p className="each-element">{movieDetails.vote_count}</p>
+          </div>
+          <div className="each-category">
+            <p className="category-names">Rating Count</p>
+            <p className="each-element">{movieDetails.vote_average}</p>
+          </div>
+        </div>
+      </>
     )
   }
 

@@ -6,14 +6,37 @@ import {CgMenuCheese} from 'react-icons/cg'
 import './index.css'
 
 class Header extends Component {
-  state = {searchInputValue: ''}
+  state = {searchInputValue: '', menuStatus: false}
 
   onClickEnterKey = event => {
     this.setState({searchInputValue: event.target.value})
   }
 
+  onClickMenuKey = () => {
+    const {menuStatus} = this.state
+    if (menuStatus === true) {
+      this.setState({menuStatus: false})
+    } else {
+      this.setState({menuStatus: true})
+    }
+  }
+
+  renderMenuElements = () => (
+    <div style={{marginLeft: 30}} className="portrait-link-container">
+      <Link className="link-decoration" to="/">
+        <h1 className="nav-link-home">Home</h1>
+      </Link>
+      <Link className="link-decoration" to="/popular">
+        <h1 className="nav-link-popular">Popular</h1>
+      </Link>
+      <Link to="/account/">
+        <FaUserCircle className="user-icon-portrait" />
+      </Link>
+    </div>
+  )
+
   render() {
-    const {searchInputValue} = this.state
+    const {searchInputValue, menuStatus} = this.state
     return (
       <nav className="nav-container">
         <div className="header-links">
@@ -30,19 +53,24 @@ class Header extends Component {
           </div>
         </div>
         <div className="search-user-container">
-          <div className="search-input-container">
-            <input
-              onChange={this.onClickEnterKey}
-              value={searchInputValue}
-              className="search-input"
-              placeholder="Search"
-              type="text"
-            />
-            <Link to={`search/${searchInputValue}`}>
-              <BiSearch className="search-icon" />
-            </Link>
+          {!menuStatus && (
+            <div className="search-input-container">
+              <input
+                onChange={this.onClickEnterKey}
+                value={searchInputValue}
+                className="search-input"
+                placeholder="Search"
+                type="text"
+              />
+              <Link to={`search/${searchInputValue}`}>
+                <BiSearch className="search-icon" />
+              </Link>
+            </div>
+          )}
+          <div className="menu-container">
+            {menuStatus && this.renderMenuElements()}
+            <CgMenuCheese onClick={this.onClickMenuKey} className="menu-icon" />
           </div>
-          <CgMenuCheese className="menu-icon" />
           <Link to="/account/">
             <FaUserCircle className="user-icon" />
           </Link>

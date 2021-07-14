@@ -35,7 +35,7 @@ class SearchResults extends Component {
       <>
         {searchedResultsList.map(movie => (
           <img
-            alt="ssd"
+            alt={movie.title}
             className="searched-image"
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
           />

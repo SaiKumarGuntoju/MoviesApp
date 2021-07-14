@@ -44,11 +44,17 @@ class Home extends Component {
     }
     const response = await fetch(MoviesUrl, options)
     const data = await response.json()
-
-    this.setState({
-      HomePageRandomMovie: data.results[randomNumber],
-      isLoading: false,
-    })
+    if (data.results[randomNumber] === undefined) {
+      this.setState({
+        HomePageRandomMovie: data.results[15],
+        isLoading: false,
+      })
+    } else {
+      this.setState({
+        HomePageRandomMovie: data.results[randomNumber],
+        isLoading: false,
+      })
+    }
   }
 
   renderBackdropPoster = () => {
@@ -62,6 +68,7 @@ class Home extends Component {
           height: 500,
           width: '100vw',
           backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <Header />

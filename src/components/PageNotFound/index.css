@@ -1,13 +1,26 @@
 .page-not-found-container {
-  background-image: url('https://cdn.pixabay.com/photo/2021/02/26/16/29/error-404-6052476_1280.png');
+  background-image: url('https://cdn.pixabay.com/photo/2020/04/30/15/34/code-5113374_1280.jpg');
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 90vh;
   background-size: cover;
+  background-position: center;
 }
 .lost-connection-title {
-  color: #475569;
+  color: #ffffff;
   font-family: 'Roboto';
+}
+.page-not-found-para {
+  text-align: center;
+  color: #ffffff;
+}
+@media screen and (max-width: 768px) {
+  .lost-connection-title {
+    margin-bottom: 0px;
+  }
+  .page-not-found-para {
+    width: 300px;
+  }
 }

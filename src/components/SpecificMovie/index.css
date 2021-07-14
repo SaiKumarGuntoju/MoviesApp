@@ -52,6 +52,8 @@
   display: flex;
   width: 100vw;
   flex-wrap: wrap;
+  justify-content: center;
+  background-color: black;
 }
 
 @media screen and (min-width: 768px) {

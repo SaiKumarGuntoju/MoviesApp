@@ -1,5 +1,5 @@
 .app-container {
-  height: 1024px;
+  height: auto;
   background-color: black;
 }
 
@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
 }
 .movies-heading {
   color: #e50014;
@@ -49,8 +49,8 @@
 @media screen and (min-width: 768px) {
   .login-card-container {
     background-color: #0c0b10;
-    width: 400px;
-    height: 380px;
+    width: 350px;
+    height: 330px;
   }
 }
 .sign-in-title {

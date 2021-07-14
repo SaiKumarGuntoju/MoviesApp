@@ -97,7 +97,7 @@ class SpecificMovie extends Component {
   render() {
     const {isLoading} = this.state
     return (
-      <div>
+      <>
         {isLoading ? (
           <div testid="loader" className="loader-container">
             <Loader type="TailSpin" color="red" height={50} width={100} />
@@ -110,7 +110,7 @@ class SpecificMovie extends Component {
             </ul>
           </>
         )}
-      </div>
+      </>
     )
   }
 }

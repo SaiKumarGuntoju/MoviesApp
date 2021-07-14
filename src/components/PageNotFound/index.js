@@ -8,7 +8,7 @@ const PageNotFound = () => (
     </div>
     <div className="page-not-found-container">
       <h1 className="lost-connection-title">Lost your way?</h1>
-      <p>
+      <p className="page-not-found-para">
         Sorry, we can’t find that page. You’ll find lots to explore on the home
         page
       </p>
